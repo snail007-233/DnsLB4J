@@ -34994,3 +34994,201 @@
 [DEBUG] 2016-10-17 17:17:47.325  request to endpoint ->10.69.10.229:1050.
 [DEBUG] 2016-10-17 17:17:47.443  request timed out endpoint (3000ms)->10.69.10.229:1054.
 [DEBUG] 2016-10-17 17:17:47.445  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:47.710  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:47.710  backup checked 10.69.10.229:1053
+[WARN ] 2016-10-17 17:17:47.710  backup offline 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:17:48.711  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:50.120  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:17:50.121  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:17:50.325  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:17:50.326  backend checked 10.69.10.229:1050
+[WARN ] 2016-10-17 17:17:50.326  backend offline 10.69.10.229:1050
+[DEBUG] 2016-10-17 17:17:50.446  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:50.446  backend checked 10.69.10.229:1054
+[WARN ] 2016-10-17 17:17:50.446  backend offline 10.69.10.229:1054
+[DEBUG] 2016-10-17 17:17:51.327  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:17:51.447  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:51.712  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:51.713  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:53.122  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:17:53.122  backend checked 10.69.10.229:1055
+[WARN ] 2016-10-17 17:17:53.122  backend offline 10.69.10.229:1055
+[DEBUG] 2016-10-17 17:17:54.123  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:17:54.328  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:17:54.329  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:17:54.447  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:54.448  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:54.714  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:54.714  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:57.123  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:17:57.124  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:17:57.329  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:17:57.330  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:17:57.449  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:57.449  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:17:57.715  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:17:57.715  backup checked 10.69.10.229:1053
+[WARN ] 2016-10-17 17:17:57.715  backup offline 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:17:58.716  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:00.124  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:00.126  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:00.331  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:00.331  backend checked 10.69.10.229:1050
+[WARN ] 2016-10-17 17:18:00.331  backend offline 10.69.10.229:1050
+[DEBUG] 2016-10-17 17:18:00.450  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:00.450  backend checked 10.69.10.229:1054
+[WARN ] 2016-10-17 17:18:00.450  backend offline 10.69.10.229:1054
+[DEBUG] 2016-10-17 17:18:01.332  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:01.451  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:01.716  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:01.717  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:03.126  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:03.126  backend checked 10.69.10.229:1055
+[WARN ] 2016-10-17 17:18:03.126  backend offline 10.69.10.229:1055
+[DEBUG] 2016-10-17 17:18:04.127  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:04.333  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:04.333  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:04.452  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:04.452  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:04.718  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:04.718  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:07.128  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:07.129  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:07.334  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:07.335  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:07.453  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:07.454  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:07.719  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:07.719  backup checked 10.69.10.229:1053
+[WARN ] 2016-10-17 17:18:07.719  backup offline 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:18:08.720  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:10.130  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:10.131  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:10.343  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:10.343  backend checked 10.69.10.229:1050
+[WARN ] 2016-10-17 17:18:10.343  backend offline 10.69.10.229:1050
+[DEBUG] 2016-10-17 17:18:10.454  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:10.455  backend checked 10.69.10.229:1054
+[WARN ] 2016-10-17 17:18:10.455  backend offline 10.69.10.229:1054
+[DEBUG] 2016-10-17 17:18:11.343  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:11.455  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:11.720  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:11.721  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:13.131  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:13.132  backend checked 10.69.10.229:1055
+[WARN ] 2016-10-17 17:18:13.132  backend offline 10.69.10.229:1055
+[DEBUG] 2016-10-17 17:18:14.132  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:14.344  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:14.345  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:14.456  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:14.457  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:14.722  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:14.723  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:17.133  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:17.135  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:17.345  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:17.346  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:17.457  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:17.458  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:17.723  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:17.724  backup checked 10.69.10.229:1053
+[WARN ] 2016-10-17 17:18:17.724  backup offline 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:18:18.724  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:20.135  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:20.136  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:20.347  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:20.347  backend checked 10.69.10.229:1050
+[WARN ] 2016-10-17 17:18:20.347  backend offline 10.69.10.229:1050
+[DEBUG] 2016-10-17 17:18:20.459  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:20.460  backend checked 10.69.10.229:1054
+[WARN ] 2016-10-17 17:18:20.460  backend offline 10.69.10.229:1054
+[DEBUG] 2016-10-17 17:18:21.348  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:21.461  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:21.725  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:21.726  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:23.137  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:23.137  backend checked 10.69.10.229:1055
+[WARN ] 2016-10-17 17:18:23.137  backend offline 10.69.10.229:1055
+[DEBUG] 2016-10-17 17:18:24.138  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:24.348  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:24.350  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:24.461  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:24.462  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:24.727  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:24.728  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:27.138  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:27.139  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:27.350  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:27.351  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:27.463  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:27.464  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:27.728  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:27.729  backup checked 10.69.10.229:1053
+[WARN ] 2016-10-17 17:18:27.729  backup offline 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:18:28.730  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:30.140  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:30.141  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:30.352  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:30.352  backend checked 10.69.10.229:1050
+[WARN ] 2016-10-17 17:18:30.352  backend offline 10.69.10.229:1050
+[DEBUG] 2016-10-17 17:18:30.464  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:30.465  backend checked 10.69.10.229:1054
+[WARN ] 2016-10-17 17:18:30.465  backend offline 10.69.10.229:1054
+[DEBUG] 2016-10-17 17:18:31.353  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:31.473  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:31.730  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:31.731  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:33.141  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:33.141  backend checked 10.69.10.229:1055
+[WARN ] 2016-10-17 17:18:33.141  backend offline 10.69.10.229:1055
+[DEBUG] 2016-10-17 17:18:34.142  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:34.353  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:34.354  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:34.473  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:34.474  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:34.732  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:34.733  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:34.828  revceived from endpoint <-10.69.10.229:1053
+[DEBUG] 2016-10-17 17:18:34.828  backup checked 10.69.10.229:1053
+[INFO ] 2016-10-17 17:18:34.828  backup online 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:18:35.829  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:37.143  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:37.144  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:37.355  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:37.356  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:37.475  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:37.476  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:38.829  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:38.830  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:40.145  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:40.146  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:40.356  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:40.357  backend checked 10.69.10.229:1050
+[WARN ] 2016-10-17 17:18:40.357  backend offline 10.69.10.229:1050
+[DEBUG] 2016-10-17 17:18:40.477  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:40.477  backend checked 10.69.10.229:1054
+[WARN ] 2016-10-17 17:18:40.477  backend offline 10.69.10.229:1054
+[DEBUG] 2016-10-17 17:18:41.357  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:41.478  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:41.831  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:41.831  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:43.146  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:43.147  backend checked 10.69.10.229:1055
+[WARN ] 2016-10-17 17:18:43.147  backend offline 10.69.10.229:1055
+[DEBUG] 2016-10-17 17:18:44.147  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:44.358  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:44.359  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:44.478  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:44.479  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:44.832  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:44.832  backup checked 10.69.10.229:1053
+[WARN ] 2016-10-17 17:18:44.832  backup offline 10.69.10.229:1053
+[DEBUG] 2016-10-17 17:18:45.833  request to endpoint ->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:47.148  request timed out endpoint (3000ms)->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:47.149  request to endpoint ->10.69.10.229:1055.
+[DEBUG] 2016-10-17 17:18:47.359  request timed out endpoint (3000ms)->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:47.360  request to endpoint ->10.69.10.229:1050.
+[DEBUG] 2016-10-17 17:18:47.480  request timed out endpoint (3000ms)->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:47.482  request to endpoint ->10.69.10.229:1054.
+[DEBUG] 2016-10-17 17:18:48.834  request timed out endpoint (3000ms)->10.69.10.229:1053.
+[DEBUG] 2016-10-17 17:18:48.834  request to endpoint ->10.69.10.229:1053.
