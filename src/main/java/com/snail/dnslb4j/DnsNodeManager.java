@@ -47,7 +47,7 @@ public class DnsNodeManager {
 			Integer timeout = Cfg.configInt("check_timeout");
 			node.put("status", STATUS_ONLINE);
 			backend.put(key, node);
-			//并发查询
+			//后端健康检查
 			Thread t = new Thread(() -> {
 				while (true) {
 					ArrayList errorCount = new ArrayList();
@@ -68,7 +68,7 @@ public class DnsNodeManager {
 						Log.logger().warn("backend offline " + key);
 					} else {
 						backend.get(key).put("status", STATUS_ONLINE);
-						Log.logger().info("backend online " + key);
+						Log.logger().debug("backend online " + key);
 					}
 					try {
 						Thread.sleep(Cfg.configInt("check_interval"));
@@ -106,7 +106,7 @@ public class DnsNodeManager {
 						Log.logger().warn("backup offline " + key);
 					} else {
 						backup.get(key).put("status", STATUS_ONLINE);
-						Log.logger().info("backup online " + key);
+						Log.logger().debug("backup online " + key);
 					}
 
 					try {
@@ -187,14 +187,6 @@ public class DnsNodeManager {
 		writeDomain(out, domain);
 		dos.writeShort(1);
 		dos.writeShort(1);
-	}
-
-	public static void main(String[] args) {
-		request(buildQuery("www.google.com", 2312), "8.8.8.8", 53, 1000, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
-			Log.logger().info("revecived : " + responsePacket);
-		}, (Channel ch, DatagramPacket requestPacket, Integer timeout) -> {
-			//Log.logger().trace(requestPacket.toString());
-		});
 	}
 
 	public static ArrayList<ConcurrentHashMap<String, String>> getNodeList() {

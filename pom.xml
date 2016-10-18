@@ -61,7 +61,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>${fully.qualified.main.class}</mainClass>
+                                    <mainClass>com.snail.dnslb4j.DnsServer</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>

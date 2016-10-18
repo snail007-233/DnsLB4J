@@ -6,7 +6,6 @@ import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import sun.util.logging.resources.logging;
 
 public final class DnsServer {
 	

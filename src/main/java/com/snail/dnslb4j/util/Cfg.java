@@ -1,9 +1,12 @@
 package com.snail.dnslb4j.util;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jodd.io.FileUtil;
 
 /**
  *
@@ -64,10 +67,6 @@ public final class Cfg {
 		prePath = aPrePath;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(getBackendDns());
-	}
-
 	public static ArrayList<ConcurrentHashMap<String, String>> getBackendDns() {
 		String[] dns0 = config("backend_dns").split(",");
 		ArrayList<ConcurrentHashMap<String, String>> dns1 = new ArrayList<>();
@@ -93,6 +92,36 @@ public final class Cfg {
 			dns3.put("port", dns2.length >= 2 ? dns2[1] : "53");
 			dns1.add(dns3);
 		}
+
+		getResolvFileNameserver().stream().forEach((ip) -> {
+			ConcurrentHashMap<String, String> nameserver = new ConcurrentHashMap<>();
+			nameserver.put("hostname", ip);
+			nameserver.put("port", "53");
+			dns1.add(nameserver);
+		});
+
 		return dns1;
 	}
+
+	private static ArrayList<String> getResolvFileNameserver() {
+		ArrayList<String> list = new ArrayList<>();
+		String file = Cfg.config("backup_dns_file");
+		if (!file.isEmpty() && new File(file).isFile()) {
+			try {
+				String[] lines = FileUtil.readString(file).split("\\n");
+				for (String line : lines) {
+					line = line.replaceAll("\t", " ").replaceAll(" +", " ").trim();
+					if (line.startsWith("nameserver")) {
+						String ip = line.split(" ")[1];
+						list.add(ip);
+					}
+				}
+			} catch (IOException ex) {
+				Logger.getLogger(Cfg.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		Log.logger().info("using nameservers[" + String.valueOf(list.size()) + "] from " + file);
+		return list;
+	}
+
 }
