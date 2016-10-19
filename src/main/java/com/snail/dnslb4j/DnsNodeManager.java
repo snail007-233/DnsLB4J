@@ -142,7 +142,7 @@ public class DnsNodeManager {
 				.handler(new SimpleChannelInboundHandler<DatagramPacket>() {
 					@Override
 					protected void messageReceived(ChannelHandlerContext ctx1, DatagramPacket packet1) throws Exception {
-						Log.logger().debug("revceived from endpoint <-" + packet1.sender().getAddress().getHostAddress() + ":" + packet1.sender().getPort());
+						Log.logger().debug("revceived from <-" + packet1.sender().getAddress().getHostAddress() + ":" + packet1.sender().getPort());
 						if (succcessCallback != null) {
 							succcessCallback.onMessage(ctx1, packet1, newPacket);
 						}
@@ -151,13 +151,13 @@ public class DnsNodeManager {
 					}
 				});
 			Channel ch = bootstrap.bind(0).sync().channel();
-			Log.logger().debug("request to endpoint ->" + hostname + ":" + port + ".");
+			Log.logger().debug("request to ->" + hostname + ":" + port + ".");
 			ch.writeAndFlush(newPacket).sync();
 			if (!ch.closeFuture().await(timeout)) {
 				if (timeoutCallback != null) {
 					timeoutCallback.onTimeout(ch, newPacket, timeout);
 				}
-				Log.logger().debug("request timed out endpoint (" + timeout + "ms)->" + hostname + ":" + port + ".");
+				Log.logger().debug("request timeout (" + timeout + "ms)->" + hostname + ":" + port + ".");
 			}
 		} catch (InterruptedException ex) {
 			Log.logger().error("DnsNodeManager.request", ex);
@@ -214,7 +214,7 @@ public class DnsNodeManager {
 			}
 		}
 		if (list.isEmpty()) {
-			Log.logger().warn("switch to backup");
+			Log.logger().warn("using backup");
 			for (Map.Entry<String, ConcurrentHashMap> entry : backup.entrySet()) {
 				String key = entry.getKey();
 				ConcurrentHashMap value = entry.getValue();

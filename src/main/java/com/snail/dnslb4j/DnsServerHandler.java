@@ -17,7 +17,7 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 	public void messageReceived(ChannelHandlerContext ctx0, DatagramPacket packet0) throws InterruptedException {
 		this.ctx0 = ctx0;
 		this.packet0 = packet0;
-		Log.logger().info("request from client <-" + packet0.sender().getAddress().getHostAddress() + ":" + packet0.sender().getPort());
+		Log.logger().info("revceived from <-" + packet0.sender().getAddress().getHostAddress() + ":" + packet0.sender().getPort());
 		dispatch();
 	}
 
@@ -40,7 +40,7 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 						reply.put("reply", Boolean.TRUE);
 						DatagramPacket newPacket = new DatagramPacket(responsePacket.content().copy(), srcPacket.sender());
 						ctx0.writeAndFlush(newPacket);
-						Log.logger().info("response to client ->" + srcPacket.sender());
+						Log.logger().info("reply to ->" + srcPacket.sender());
 					}
 				}, null);
 			});
