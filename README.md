@@ -1,5 +1,5 @@
 # DnsLB4J
-dns high performance load balancing proxy , writing in java.  
+ A high performance load balancing dns proxy , writing in java.  
 # Requirement
 Linux  
 JDK1.8+  
