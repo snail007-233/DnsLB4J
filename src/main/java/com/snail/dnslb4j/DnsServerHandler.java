@@ -28,20 +28,15 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 
 	public void dispatch() {
 		Integer timeout = Cfg.configInt("check_timeout");
-		ConcurrentHashMap<String, Boolean> reply = new ConcurrentHashMap();
-		reply.put("reply", Boolean.FALSE);
 		DnsNodeManager.getNodeList().stream().forEach(dnsServer -> {
 			String hostname = dnsServer.get("hostname");
 			Integer port = Integer.valueOf(dnsServer.get("port"));
 			DatagramPacket srcPacket = packet0.copy();
 			Thread t = new Thread(() -> {
 				DnsNodeManager.request(srcPacket.content(), hostname, port, timeout, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
-					if (!reply.get("reply")) {
-						reply.put("reply", Boolean.TRUE);
-						DatagramPacket newPacket = new DatagramPacket(responsePacket.content().copy(), srcPacket.sender());
-						ctx0.writeAndFlush(newPacket);
-						Log.logger().info("reply to ->" + srcPacket.sender());
-					}
+					DatagramPacket newPacket = new DatagramPacket(responsePacket.content().copy(), srcPacket.sender());
+					ctx0.writeAndFlush(newPacket);
+					Log.logger().info("reply to ->" + srcPacket.sender());
 				}, null);
 			});
 			t.start();
