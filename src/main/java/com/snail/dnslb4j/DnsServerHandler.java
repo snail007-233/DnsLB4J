@@ -5,7 +5,6 @@ import com.snail.dnslb4j.util.Log;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
