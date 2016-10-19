@@ -1,6 +1,7 @@
 # DnsLB4J
 dns high performance load balancing proxy , writing in java.  
 # Requirement
+Linux
 JDK1.8+  
 Maven 3.3+  
 unzip  
