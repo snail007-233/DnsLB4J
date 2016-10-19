@@ -2,7 +2,6 @@ package com.snail.dnslb4j;
 
 import com.snail.dnslb4j.util.BitSet;
 import com.snail.dnslb4j.util.Cfg;
-import static com.snail.dnslb4j.util.Cfg.config;
 import com.snail.dnslb4j.util.Log;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
