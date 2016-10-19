@@ -25,6 +25,7 @@ import com.snail.dnslb4j.util.RequestSuccessCallback;
 import com.snail.dnslb4j.util.RequestTimeoutCallback;
 import java.util.ArrayList;
 import java.util.Map;
+import jodd.util.ThreadUtil;
 
 /**
  *
@@ -59,10 +60,7 @@ public class DnsNodeManager {
 							request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
 								errorCount.add(1);
 							});
-							try {
-								Thread.sleep(Cfg.configInt("check_interval"));
-							} catch (InterruptedException ex) {
-							}
+							ThreadUtil.sleep(Cfg.configInt("check_interval"));
 						}
 
 						Log.logger().debug("backend checked " + key);
@@ -74,12 +72,9 @@ public class DnsNodeManager {
 							backend.get(key).put("status", STATUS_ONLINE);
 							Log.logger().debug("backend online " + key);
 						}
-						try {
-							Thread.sleep(Cfg.configInt("check_interval"));
-						} catch (InterruptedException ex) {
-						}
 					} catch (Exception e) {
 					}
+					ThreadUtil.sleep(Cfg.configInt("check_interval"));
 				}
 			});
 			t.start();
@@ -104,10 +99,7 @@ public class DnsNodeManager {
 							request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
 								errorCount.add(1);
 							});
-							try {
-								Thread.sleep(Cfg.configInt("check_interval"));
-							} catch (InterruptedException ex) {
-							}
+							ThreadUtil.sleep(Cfg.configInt("check_interval"));
 						}
 
 						Log.logger().debug("backup checked " + key);
@@ -119,13 +111,9 @@ public class DnsNodeManager {
 							backup.get(key).put("status", STATUS_ONLINE);
 							Log.logger().debug("backup online " + key);
 						}
-
-						try {
-							Thread.sleep(Cfg.configInt("check_interval"));
-						} catch (InterruptedException ex) {
-						}
 					} catch (Exception e) {
 					}
+					ThreadUtil.sleep(Cfg.configInt("check_interval"));
 				}
 			});
 			t.start();
