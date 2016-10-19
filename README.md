@@ -47,3 +47,6 @@ error_count=3
 check_timeout=3000  
 ;两次检测后端dns之间的时间间隔,单位毫秒  
 check_interval=1000  
+
+#End
+邮件功能暂时没有开发。  
