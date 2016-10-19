@@ -49,29 +49,36 @@ public class DnsNodeManager {
 			//后端健康检查
 			Thread t = new Thread(() -> {
 				while (true) {
-					ArrayList errorCount = new ArrayList();
-					for (int i = 0; i < Cfg.configInt("check_count"); i++) {
-						int id;
-						synchronized (RNADOM) {
-							id = RNADOM.nextInt() & 0XFF;
-						}
-						request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
-							errorCount.add(1);
-						});
-					}
-
-					Log.logger().debug("backend checked " + key);
-
-					if (errorCount.size() >= Cfg.configInt("error_count")) {
-						backend.get(key).put("status", STATUS_OFFLINE);
-						Log.logger().warn("backend offline " + key);
-					} else {
-						backend.get(key).put("status", STATUS_ONLINE);
-						Log.logger().debug("backend online " + key);
-					}
 					try {
-						Thread.sleep(Cfg.configInt("check_interval"));
-					} catch (InterruptedException ex) {
+						ArrayList errorCount = new ArrayList();
+						for (int i = 0; i < Cfg.configInt("check_count"); i++) {
+							int id;
+							synchronized (RNADOM) {
+								id = RNADOM.nextInt() & 0XFF;
+							}
+							request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
+								errorCount.add(1);
+							});
+							try {
+								Thread.sleep(Cfg.configInt("check_interval"));
+							} catch (InterruptedException ex) {
+							}
+						}
+
+						Log.logger().debug("backend checked " + key);
+
+						if (errorCount.size() >= Cfg.configInt("error_count")) {
+							backend.get(key).put("status", STATUS_OFFLINE);
+							Log.logger().warn("backend offline " + key);
+						} else {
+							backend.get(key).put("status", STATUS_ONLINE);
+							Log.logger().debug("backend online " + key);
+						}
+						try {
+							Thread.sleep(Cfg.configInt("check_interval"));
+						} catch (InterruptedException ex) {
+						}
+					} catch (Exception e) {
 					}
 				}
 			});
@@ -87,30 +94,37 @@ public class DnsNodeManager {
 			//并发查询
 			Thread t = new Thread(() -> {
 				while (true) {
-					ArrayList errorCount = new ArrayList();
-					for (int i = 0; i < Cfg.configInt("check_count"); i++) {
-						int id;
-						synchronized (RNADOM) {
-							id = RNADOM.nextInt() & 0XFF;
-						}
-						request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
-							errorCount.add(1);
-						});
-					}
-
-					Log.logger().debug("backup checked " + key);
-
-					if (errorCount.size() >= Cfg.configInt("error_count")) {
-						backup.get(key).put("status", STATUS_OFFLINE);
-						Log.logger().warn("backup offline " + key);
-					} else {
-						backup.get(key).put("status", STATUS_ONLINE);
-						Log.logger().debug("backup online " + key);
-					}
-
 					try {
-						Thread.sleep(Cfg.configInt("check_interval"));
-					} catch (InterruptedException ex) {
+						ArrayList errorCount = new ArrayList();
+						for (int i = 0; i < Cfg.configInt("check_count"); i++) {
+							int id;
+							synchronized (RNADOM) {
+								id = RNADOM.nextInt() & 0XFF;
+							}
+							request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
+								errorCount.add(1);
+							});
+							try {
+								Thread.sleep(Cfg.configInt("check_interval"));
+							} catch (InterruptedException ex) {
+							}
+						}
+
+						Log.logger().debug("backup checked " + key);
+
+						if (errorCount.size() >= Cfg.configInt("error_count")) {
+							backup.get(key).put("status", STATUS_OFFLINE);
+							Log.logger().warn("backup offline " + key);
+						} else {
+							backup.get(key).put("status", STATUS_ONLINE);
+							Log.logger().debug("backup online " + key);
+						}
+
+						try {
+							Thread.sleep(Cfg.configInt("check_interval"));
+						} catch (InterruptedException ex) {
+						}
+					} catch (Exception e) {
 					}
 				}
 			});
