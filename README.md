@@ -7,8 +7,11 @@ Maven 3.3+
 unzip  
 # Usage:
 git clone https://github.com/snail007/DnsLB4J.git  
+
 cd DnsLB4J  
+
 mvn install  
+
 cp target/DnsLB4J-1.0-SNAPSHOT-package.zip /root/  
 
 cd /root/  
