@@ -1,5 +1,6 @@
 package com.snail.dnslb4j;
 
+import com.snail.dnslb4j.util.DnsNodeManager;
 import com.snail.dnslb4j.util.Cfg;
 import com.snail.dnslb4j.util.Log;
 import io.netty.bootstrap.Bootstrap;

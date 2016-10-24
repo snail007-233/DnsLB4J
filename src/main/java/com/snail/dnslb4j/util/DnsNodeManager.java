@@ -1,8 +1,7 @@
-package com.snail.dnslb4j;
+package com.snail.dnslb4j.util;
 
-import com.snail.dnslb4j.util.BitSet;
-import com.snail.dnslb4j.util.Cfg;
-import com.snail.dnslb4j.util.Log;
+import com.snail.dnslb4j.dns.DnsMessage;
+import com.snail.dnslb4j.dns.response.Record;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -13,18 +12,17 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
+import io.netty.util.ReferenceCountUtil;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.IDN;
 import java.net.InetSocketAddress;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
-import com.snail.dnslb4j.util.RequestSuccessCallback;
-import com.snail.dnslb4j.util.RequestTimeoutCallback;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jodd.util.ThreadUtil;
 
 /**
@@ -57,7 +55,9 @@ public class DnsNodeManager {
 							synchronized (RNADOM) {
 								id = RNADOM.nextInt() & 0XFF;
 							}
-							request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
+							request(Unpooled.copiedBuffer(DnsMessage.buildQuery(Cfg.config("check_domain"), id)), hostname, Integer.valueOf(port), timeout, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
+								backend.get(key).put("status", STATUS_ONLINE);
+							}, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
 								errorCount.add(1);
 							});
 							ThreadUtil.sleep(Cfg.configInt("check_interval"));
@@ -94,9 +94,12 @@ public class DnsNodeManager {
 						for (int i = 0; i < Cfg.configInt("check_count"); i++) {
 							int id;
 							synchronized (RNADOM) {
-								id = RNADOM.nextInt() & 0XFF;
+								id = RNADOM.nextInt() & 0xFF;
 							}
-							request(buildQuery(Cfg.config("check_domain"), id), hostname, Integer.valueOf(port), timeout, null, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
+							byte[] packet = DnsMessage.buildQuery(Cfg.config("check_domain"), id);
+							request(Unpooled.copiedBuffer(packet), hostname, Integer.valueOf(port), timeout, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
+								backup.get(key).put("status", STATUS_ONLINE);
+							}, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
 								errorCount.add(1);
 							});
 							ThreadUtil.sleep(Cfg.configInt("check_interval"));
@@ -132,7 +135,7 @@ public class DnsNodeManager {
 					protected void messageReceived(ChannelHandlerContext ctx1, DatagramPacket packet1) throws Exception {
 						Log.logger().debug("revceived from <-" + packet1.sender().getAddress().getHostAddress() + ":" + packet1.sender().getPort());
 						if (succcessCallback != null) {
-							succcessCallback.onMessage(ctx1, packet1, newPacket);
+							succcessCallback.onMessage(ctx1, packet1, newPacket.copy());
 						}
 						ctx1.channel().close();
 						ctx1.close();
@@ -140,10 +143,10 @@ public class DnsNodeManager {
 				});
 			Channel ch = bootstrap.bind(0).sync().channel();
 			Log.logger().debug("request to ->" + hostname + ":" + port + ".");
-			ch.writeAndFlush(newPacket).sync();
+			ch.writeAndFlush(newPacket.copy()).sync();
 			if (!ch.closeFuture().await(timeout)) {
 				if (timeoutCallback != null) {
-					timeoutCallback.onTimeout(ch, newPacket, timeout);
+					timeoutCallback.onTimeout(ch, newPacket.copy(), timeout);
 				}
 				Log.logger().debug("request timeout (" + timeout + "ms)->" + hostname + ":" + port + ".");
 			}
@@ -152,42 +155,6 @@ public class DnsNodeManager {
 		} finally {
 			group.shutdownGracefully();
 		}
-	}
-
-	public static ByteBuf buildQuery(String domain, int id) {
-		ByteArrayOutputStream baos = new ByteArrayOutputStream(512);
-		DataOutputStream dos = new DataOutputStream(baos);
-		BitSet bits = new BitSet();
-		bits.set(8);
-		try {
-			dos.writeShort((short) id);
-			dos.writeShort((short) bits.value());
-			dos.writeShort(1);
-			dos.writeShort(0);
-			dos.writeShort(0);
-			dos.writeShort(0);
-			dos.flush();
-			writeQuestion(baos, domain);
-		} catch (IOException e) {
-			throw new AssertionError(e);
-		}
-		return Unpooled.copiedBuffer(baos.toByteArray());
-	}
-
-	private static void writeDomain(OutputStream out, String domain) throws IOException {
-		for (String s : domain.split("[.\u3002\uFF0E\uFF61]")) {
-			byte[] buffer = IDN.toASCII(s).getBytes();
-			out.write(buffer.length);
-			out.write(buffer, 0, buffer.length); // ?
-		}
-		out.write(0);
-	}
-
-	private static void writeQuestion(OutputStream out, String domain) throws IOException {
-		DataOutputStream dos = new DataOutputStream(out);
-		writeDomain(out, domain);
-		dos.writeShort(1);
-		dos.writeShort(1);
 	}
 
 	public static ArrayList<ConcurrentHashMap<String, String>> getNodeList() {
@@ -219,4 +186,5 @@ public class DnsNodeManager {
 
 		return list;
 	}
+
 }

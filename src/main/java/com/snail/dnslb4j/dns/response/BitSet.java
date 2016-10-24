@@ -1,4 +1,4 @@
-package com.snail.dnslb4j.util;
+package com.snail.dnslb4j.dns.response;
 
 public final class BitSet {
 
