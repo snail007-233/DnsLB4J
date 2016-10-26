@@ -1,4 +1,3 @@
-
 package com.snail.dnslb4j.util;
 
 import java.io.File;
@@ -11,10 +10,6 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author pengmeng
- */
 public class ConfigLoader {
 
     private Properties props = new Properties();

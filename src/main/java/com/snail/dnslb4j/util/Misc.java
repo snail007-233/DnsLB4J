@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.snail.dnslb4j.util;
 
 import io.netty.buffer.ByteBuf;
@@ -10,10 +5,6 @@ import io.netty.buffer.Unpooled;
 import java.util.BitSet;
 import java.util.Random;
 
-/**
- *
- * @author pengmeng
- */
 public class Misc {
 
 	public static byte[] byteBuf2bytes(ByteBuf buf) {
@@ -51,17 +42,6 @@ public class Misc {
 			+ (byte) ((b >> 5) & 0x1) + (byte) ((b >> 4) & 0x1)
 			+ (byte) ((b >> 3) & 0x1) + (byte) ((b >> 2) & 0x1)
 			+ (byte) ((b >> 1) & 0x1) + (byte) ((b >> 0) & 0x1);
-	}
-
-	public static void main(String[] args) {
-		Random random = new Random();
-		BitSet bitSet = new BitSet(512);
-		for (int i = 0; i < 10; i++) {
-			int k = (int) (random.nextFloat() * 65535);
-			System.err.println(k);
-			setBitsIntInBitset(bitSet, k, 0, 16);
-			System.err.println(Misc.bytes2BitString(Misc.getBitsetBytes(bitSet, 512, 0)));
-		}
 	}
 
 	public static BitSet bytes2bitset(byte[] data, int bitSetSize) {

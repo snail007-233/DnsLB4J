@@ -10,10 +10,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import jodd.io.StreamUtil;
 
-/**
- *
- * @author pengmeng
- */
+
 public class Jar {
 
     /**

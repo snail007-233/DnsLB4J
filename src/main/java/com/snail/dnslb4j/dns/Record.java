@@ -1,4 +1,4 @@
-package com.snail.dnslb4j.dns.response;
+package com.snail.dnslb4j.dns;
 
 public final class Record {
 
@@ -7,13 +7,13 @@ public final class Record {
 	/**
 	 * A 记录 类型
 	 */
-	public static final int TYPE_A = 1;
+	public static final int TYPE_A = Packet.QUERY_TYPE_A;
 
 	/**
 	 * CName 类型
 	 */
-	public static final int TYPE_CNAME = 5;
-
+	public static final int TYPE_CNAME = Packet.QUERY_TYPE_CNAME;
+	
 	/**
 	 * 具体的值，A 记录时为IP，CName时为指向的域名
 	 */
@@ -39,24 +39,6 @@ public final class Record {
 		this.type = type;
 		this.ttl = ttl < TTL_MIN_SECONDS ? TTL_MIN_SECONDS : ttl;
 		this.timeStamp = timeStamp;
-	}
-
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || !(o instanceof Record)) {
-			return false;
-		}
-		Record another = (Record) o;
-		return this.value.equals(another.value)
-			&& this.type == another.type
-			&& this.ttl == another.ttl
-			&& this.timeStamp == another.timeStamp;
-	}
-
-	public int hashCode() {
-		return value.hashCode() * 31 * 31 + ttl * 31 + (int) timeStamp;
 	}
 
 	public boolean isA() {

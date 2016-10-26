@@ -8,10 +8,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jodd.io.FileUtil;
 
-/**
- *
- * @author pengmeng
- */
 public final class Cfg {
 
 	public static ConfigLoader config;

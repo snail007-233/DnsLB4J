@@ -1,7 +1,6 @@
 package com.snail.dnslb4j.util;
 
-import com.snail.dnslb4j.dns.DnsMessage;
-import com.snail.dnslb4j.dns.response.Record;
+import com.snail.dnslb4j.dns.Packet;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -12,23 +11,14 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.util.ReferenceCountUtil;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jodd.util.ThreadUtil;
 
-/**
- *
- * @author pengmeng
- */
+
 public class DnsNodeManager {
 
 	private static ConcurrentHashMap<String, ConcurrentHashMap> backend = new ConcurrentHashMap<>();
@@ -55,7 +45,7 @@ public class DnsNodeManager {
 							synchronized (RNADOM) {
 								id = RNADOM.nextInt() & 0XFF;
 							}
-							request(Unpooled.copiedBuffer(DnsMessage.buildQuery(Cfg.config("check_domain"), id)), hostname, Integer.valueOf(port), timeout, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
+							request(Unpooled.copiedBuffer(new Packet().setQuery().id(id).queryDomain(Cfg.config("check_domain")).getBytes()), hostname, Integer.valueOf(port), timeout, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
 								backend.get(key).put("status", STATUS_ONLINE);
 							}, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
 								errorCount.add(1);
@@ -96,7 +86,7 @@ public class DnsNodeManager {
 							synchronized (RNADOM) {
 								id = RNADOM.nextInt() & 0xFF;
 							}
-							byte[] packet = DnsMessage.buildQuery(Cfg.config("check_domain"), id);
+							byte[] packet = new Packet().setQuery().id(id).queryDomain(Cfg.config("check_domain")).getBytes();
 							request(Unpooled.copiedBuffer(packet), hostname, Integer.valueOf(port), timeout, (ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) -> {
 								backup.get(key).put("status", STATUS_ONLINE);
 							}, (Channel ch, DatagramPacket requestPacket, Integer timeout1) -> {
