@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import jodd.util.ThreadUtil;
 
-
 public class DnsNodeManager {
 
 	private static ConcurrentHashMap<String, ConcurrentHashMap> backend = new ConcurrentHashMap<>();
@@ -147,10 +146,10 @@ public class DnsNodeManager {
 		}
 	}
 
-	public static ArrayList<ConcurrentHashMap<String, String>> getNodeList() {
+	public static NodeList getNodeList() {
 
 		ArrayList<ConcurrentHashMap<String, String>> list = new ArrayList<>();
-
+		int type = 0;
 		for (Map.Entry<String, ConcurrentHashMap> entry : backend.entrySet()) {
 			String key = entry.getKey();
 			ConcurrentHashMap value = entry.getValue();
@@ -159,6 +158,7 @@ public class DnsNodeManager {
 			}
 		}
 		if (list.isEmpty()) {
+			type = NodeList.TYPE_BACKUP;
 			Log.logger().warn("using backup");
 			for (Map.Entry<String, ConcurrentHashMap> entry : backup.entrySet()) {
 				String key = entry.getKey();
@@ -171,10 +171,11 @@ public class DnsNodeManager {
 				Log.logger().error("backup unavailable");
 			}
 		} else {
+			type=NodeList.TYPE_BACKEND;
 			Log.logger().warn("using backend");
 		}
 
-		return list;
+		return new NodeList(list, type);
 	}
 
 }

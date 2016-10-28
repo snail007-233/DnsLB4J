@@ -7,6 +7,7 @@ import com.snail.dnslb4j.util.DnsNodeManager;
 import com.snail.dnslb4j.util.Cfg;
 import com.snail.dnslb4j.util.Log;
 import com.snail.dnslb4j.util.Misc;
+import com.snail.dnslb4j.util.NodeList;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.DatagramPacket;
@@ -29,7 +30,7 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 			String cacheKey = requestPacket.queryDomain();
 			String ip = Cache.get(cacheKey);
 			if (!ip.isEmpty()) {
-				Log.logger().info("reply to -> " + packet0.sender() + " [ from cache ] ("+requestPacket.queryDomain()+"->"+ip+")");
+				Log.logger().info("reply to -> " + packet0.sender() + " [ from cache ] (" + requestPacket.queryDomain() + "->" + ip + ")");
 				Packet cachePacket = new Packet().setAnswer();
 				cachePacket.id(requestPacket.id())
 					.queryDomain(requestPacket.queryDomain())
@@ -46,7 +47,8 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 		Integer timeout = Cfg.configInt("check_timeout");
 		ConcurrentHashMap<String, Boolean> reply = new ConcurrentHashMap();
 		reply.put("reply", Boolean.FALSE);
-		DnsNodeManager.getNodeList().stream().forEach((ConcurrentHashMap<String, String> dnsServer) -> {
+		NodeList nodeList = DnsNodeManager.getNodeList();
+		nodeList.getList().stream().forEach((ConcurrentHashMap<String, String> dnsServer) -> {
 			String hostname = dnsServer.get("hostname");
 			Integer port = Integer.valueOf(dnsServer.get("port"));
 			DatagramPacket srcPacket = packet0.copy();
@@ -65,11 +67,15 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 						}
 						Log.logger().info("reply to ->" + srcPacket.sender() + " " + responsePacket1.queryDomain() + " -> " + (record != null ? record.value : ""));
 						if (record != null) {
-							String cacheKey = responsePacket1.queryDomain();
-							int ttl = record.ttl;
-							int minTtl = Cfg.configInt("ttl_min_seconds");
-							ttl = ttl > minTtl ? minTtl : minTtl;
-							Cache.set(cacheKey, record.value, ttl);
+							boolean cacheBackend = nodeList.getTYPE() == NodeList.TYPE_BACKEND && Cfg.configBoolean("cache_backend");
+							boolean cacheBackup = nodeList.getTYPE() == NodeList.TYPE_BACKUP && Cfg.configBoolean("cache_backup");
+							if (cacheBackend || cacheBackup) {
+								String cacheKey = responsePacket1.queryDomain();
+								int ttl = record.ttl;
+								int minTtl = Cfg.configInt("ttl_min_seconds");
+								ttl = ttl > minTtl ? minTtl : minTtl;
+								Cache.set(cacheKey, record.value, ttl);
+							}
 						}
 					}
 				}, null);
