@@ -1,6 +1,12 @@
 package com.snail.dnslb4j.dns;
 
+import com.snail.dnslb4j.util.DnsNodeManager;
 import com.snail.dnslb4j.util.Misc;
+import com.snail.dnslb4j.util.RequestSuccessCallback;
+import com.snail.dnslb4j.util.RequestTimeoutCallback;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.socket.DatagramPacket;
 import java.net.IDN;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -221,8 +227,8 @@ public class Packet {
 	}
 
 	public byte[] getBytes() {
-		int offset=qr()==QR_QUERY?QUESTION_END_OFFSET:ANSWER_END_OFFSET;
-		return Misc.getBitsetBytes(packetBitSet, packetSize, ID_OFFSET);
+		int offset = qr() == QR_QUERY ? QUESTION_END_OFFSET : ANSWER_END_OFFSET;
+		return Misc.getBitsetBytes(packetBitSet, packetSize, ID_OFFSET, (offset - ID_OFFSET + 1) / 8);
 	}
 
 	public int questionCount() {
@@ -294,7 +300,7 @@ public class Packet {
 		Misc.setBitsIntInBitset(packetBitSet, queryClass, QUESTION_OFFSET + domainBytes.length * 8 + 16, 16);
 		//set question count
 		questionCount(1);
-		QUESTION_END_OFFSET = QUESTION_OFFSET + domainBytes.length - 1 + 32;
+		QUESTION_END_OFFSET = QUESTION_OFFSET + domainBytes.length * 8 - 1 + 32;
 		return this;
 	}
 
@@ -367,7 +373,27 @@ public class Packet {
 		int answerOffset = findNameEndOffset(QUESTION_OFFSET) + 32;
 		Misc.setBitsetBytes(answerBytes, packetBitSet, packetSize, answerOffset);
 		answerCount(1);
-		ANSWER_END_OFFSET = answerOffset + answerBytes.length - 1;
+		ANSWER_END_OFFSET = answerOffset + answerBytes.length * 8 - 1;
 		return this;
+	}
+
+	public static void main(String[] args) {
+		Packet query = new Packet();
+		query.setQuery().randomId().queryDomain("www.baidu.com");
+		byte[] bytes = query.getBytes();
+		//System.out.println(Misc.bytes2BitString(bytes));
+		DnsNodeManager.request(Misc.bytes2ByteBuf(bytes), "192.168.1.1", 53, 3000, new RequestSuccessCallback() {
+
+			@Override
+			public void onMessage(ChannelHandlerContext ctx1, DatagramPacket responsePacket, DatagramPacket requestPacket) {
+				//System.out.println(Misc.bytes2BitString(Misc.byteBuf2bytes(responsePacket.copy().content())));
+			}
+		}, new RequestTimeoutCallback() {
+
+			@Override
+			public void onTimeout(Channel ch, DatagramPacket requestPacket, Integer timeout) {
+				System.out.println("timeout");
+			}
+		});
 	}
 }
