@@ -133,7 +133,7 @@ public class DnsNodeManager {
 				});
 			Channel ch = bootstrap.bind(0).sync().channel();
 			Log.logger().debug("request to ->" + hostname + ":" + port + ".");
-			ch.writeAndFlush(newPacket.copy()).sync();
+			ch.writeAndFlush(newPacket.copy());//.sync();
 			if (!ch.closeFuture().await(timeout)) {
 				if (timeoutCallback != null) {
 					timeoutCallback.onTimeout(ch, newPacket.copy(), timeout);
