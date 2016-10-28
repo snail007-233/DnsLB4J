@@ -29,7 +29,7 @@ public class DnsServerHandler extends SimpleChannelInboundHandler<DatagramPacket
 			String cacheKey = requestPacket.queryDomain();
 			String ip = Cache.get(cacheKey);
 			if (!ip.isEmpty()) {
-				Log.logger().info("reply to -> " + packet0.sender() + " [ from cache ]");
+				Log.logger().info("reply to -> " + packet0.sender() + " [ from cache ] ("+requestPacket.queryDomain()+"->"+ip+")");
 				Packet cachePacket = new Packet().setAnswer();
 				cachePacket.id(requestPacket.id())
 					.queryDomain(requestPacket.queryDomain())

@@ -221,6 +221,7 @@ public class Packet {
 	}
 
 	public byte[] getBytes() {
+		int offset=qr()==QR_QUERY?QUESTION_END_OFFSET:ANSWER_END_OFFSET;
 		return Misc.getBitsetBytes(packetBitSet, packetSize, ID_OFFSET);
 	}
 
