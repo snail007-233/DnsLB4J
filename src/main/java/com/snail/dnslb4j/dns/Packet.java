@@ -13,6 +13,9 @@ public class Packet {
 
 	private final int packetSize = 512 * 8;
 	private BitSet packetBitSet = new BitSet(packetSize);
+	private int QUESTION_END_OFFSET = 0;
+	private int ANSWER_END_OFFSET = 0;
+
 	private final int ID_OFFSET = 0;
 	private final int ID_BIT_LENGTH = 16;
 	private final int QUESTION_COUNT_OFFSET = 32;
@@ -120,6 +123,11 @@ public class Packet {
 
 	public Packet(byte[] data) {
 		packetBitSet = Misc.setBitsetBytes(data, packetBitSet, packetSize, ID_OFFSET);
+		if (qr() == QR_QUERY) {
+			QUESTION_END_OFFSET = data.length - 1;
+		} else {
+			ANSWER_END_OFFSET = data.length - 1;
+		}
 	}
 
 	public int id() {
@@ -285,6 +293,7 @@ public class Packet {
 		Misc.setBitsIntInBitset(packetBitSet, queryClass, QUESTION_OFFSET + domainBytes.length * 8 + 16, 16);
 		//set question count
 		questionCount(1);
+		QUESTION_END_OFFSET = QUESTION_OFFSET + domainBytes.length - 1 + 32;
 		return this;
 	}
 
@@ -351,13 +360,13 @@ public class Packet {
 			, 0x00, 0x01//type
 			, 0x00, 0x01//class
 			, ttlBytes[0], ttlBytes[1], ttlBytes[2], ttlBytes[3]//ttl
-			, 0x00
-			, 0x04//playload length
+			, 0x00, 0x04//playload length
 			, ipBytes[0], ipBytes[1], ipBytes[2], ipBytes[3]
 		};
 		int answerOffset = findNameEndOffset(QUESTION_OFFSET) + 32;
 		Misc.setBitsetBytes(answerBytes, packetBitSet, packetSize, answerOffset);
 		answerCount(1);
+		ANSWER_END_OFFSET = answerOffset + answerBytes.length - 1;
 		return this;
 	}
 }
