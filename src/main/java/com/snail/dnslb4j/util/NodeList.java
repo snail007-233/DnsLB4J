@@ -10,12 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class NodeList {
 
-	private ArrayList<ConcurrentHashMap<String, String>> list;
+	private final ArrayList<ConcurrentHashMap<String, String>> list;
 	public static final int TYPE_BACKUP = 1;
 	public static final int TYPE_BACKEND = 2;
 	private int TYPE = 0;
 
 	public NodeList(ArrayList<ConcurrentHashMap<String, String>> list, int type) {
+		this.list=list;
 		TYPE = type;
 	}
 
