@@ -50,8 +50,10 @@ error_count=3
 check_timeout=3000  
 ;两次检测后端dns之间的时间间隔,单位毫秒  
 check_interval=1000  
-;域名解析结果是否缓存  
-cache=true  
+;主服务器域名解析结果是否缓存  
+cache_backend=true  
+;备份服务器解析结果是否缓存  
+cache_backup=false  
 ;域名解析结果最小缓存时间，单位秒  
 ttl_min_seconds=1800  
 
