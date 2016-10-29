@@ -355,6 +355,12 @@ public class Packet {
 		return records;
 	}
 
+	public Packet answer(String domain, String ip, int ttl) {
+		queryDomain(domain);
+		answer(ip, ttl);
+		return this;
+	}
+
 	public Packet answer(String ip, int ttl) {
 		byte[] ipBytes = new byte[4];
 		try {
