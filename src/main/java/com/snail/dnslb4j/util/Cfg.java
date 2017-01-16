@@ -30,9 +30,8 @@ public final class Cfg {
 			config = new ConfigLoader(path, false, true)
 				.setCfgFilename("config.ini", false);
 		}
-
 		String value = config.getValue(key);
-		return value == null ? "" : value;
+		return value == null ? "" : value.trim();
 	}
 
 	public static Integer configInt(String key) {
@@ -64,8 +63,12 @@ public final class Cfg {
 	}
 
 	public static ArrayList<ConcurrentHashMap<String, String>> getBackendDns() {
-		String[] dns0 = config("backend_dns").split(",");
 		ArrayList<ConcurrentHashMap<String, String>> dns1 = new ArrayList<>();
+		String backup_dns = config("backend_dns");
+		if (backup_dns.isEmpty()) {
+			return dns1;
+		}
+		String[] dns0 = config("backend_dns").split(",");
 
 		for (String string : dns0) {
 			String[] dns2 = string.split(":");
@@ -78,15 +81,18 @@ public final class Cfg {
 	}
 
 	public static ArrayList<ConcurrentHashMap<String, String>> getBackupDns() {
-		String[] dns0 = config("backup_dns").split(",");
 		ArrayList<ConcurrentHashMap<String, String>> dns1 = new ArrayList<>();
 
-		for (String string : dns0) {
-			String[] dns2 = string.split(":");
-			ConcurrentHashMap<String, String> dns3 = new ConcurrentHashMap<>();
-			dns3.put("hostname", dns2[0]);
-			dns3.put("port", dns2.length >= 2 ? dns2[1] : "53");
-			dns1.add(dns3);
+		String backup_dns = config("backup_dns");
+		if (!backup_dns.isEmpty()) {
+			String[] dns0 = config("backup_dns").split(",");
+			for (String string : dns0) {
+				String[] dns2 = string.split(":");
+				ConcurrentHashMap<String, String> dns3 = new ConcurrentHashMap<>();
+				dns3.put("hostname", dns2[0]);
+				dns3.put("port", dns2.length >= 2 ? dns2[1] : "53");
+				dns1.add(dns3);
+			}
 		}
 
 		getResolvFileNameserver().stream().forEach((ip) -> {
