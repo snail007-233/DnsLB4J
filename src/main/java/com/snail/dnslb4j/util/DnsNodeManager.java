@@ -71,7 +71,6 @@ public class DnsNodeManager {
 	}
 
 	public static void init() {
-
 		monitor(Cfg.getBackendDns(), backend, "backend", STATUS_OFFLINE);
 		monitor(Cfg.getBackupDns(), backup, "backup", STATUS_ONLINE);
 	}
