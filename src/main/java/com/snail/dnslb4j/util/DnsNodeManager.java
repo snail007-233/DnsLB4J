@@ -26,13 +26,13 @@ public class DnsNodeManager {
 	private static final String STATUS_ONLINE = "1";
 	private static final String STATUS_OFFLINE = "2";
 
-	private static void monitor(ArrayList<ConcurrentHashMap<String, String>> nodeList, ConcurrentHashMap<String, ConcurrentHashMap> nodeListMap, String nodeListName) {
+	private static void monitor(ArrayList<ConcurrentHashMap<String, String>> nodeList, ConcurrentHashMap<String, ConcurrentHashMap> nodeListMap, String nodeListName, String initStatus) {
 		nodeList.stream().forEach((ConcurrentHashMap<String, String> node) -> {
 			String hostname = node.get("hostname");
 			String port = node.get("port");
 			String key = hostname + ":" + port;
 			Integer timeout = Cfg.configInt("check_timeout");
-			node.put("status", STATUS_ONLINE);
+			node.put("status", initStatus);
 			nodeListMap.put(key, node);
 			//健康检查
 			Thread t = new Thread(() -> {
@@ -71,8 +71,9 @@ public class DnsNodeManager {
 	}
 
 	public static void init() {
-		monitor(Cfg.getBackendDns(), backend, "backend");
-		monitor(Cfg.getBackupDns(), backup, "backup");
+
+		monitor(Cfg.getBackendDns(), backend, "backend", STATUS_OFFLINE);
+		monitor(Cfg.getBackupDns(), backup, "backup", STATUS_ONLINE);
 	}
 
 	public static void request(ByteBuf packet, String hostname, int port, int timeout, RequestSuccessCallback succcessCallback, RequestTimeoutCallback timeoutCallback) {
