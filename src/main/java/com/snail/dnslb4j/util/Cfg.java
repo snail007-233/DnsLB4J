@@ -118,11 +118,11 @@ public final class Cfg {
 						list.add(ip);
 					}
 				}
+				Log.logger().info("using nameservers[" + String.valueOf(list.size()) + "] from " + file);
 			} catch (IOException ex) {
 				Logger.getLogger(Cfg.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
-		Log.logger().info("using nameservers[" + String.valueOf(list.size()) + "] from " + file);
 		return list;
 	}
 
